@@ -57,7 +57,7 @@ async function getLink(e){
 				const shortUrl = 'https://rel.ink/' + json.hashid;
 				const longUrl = json.url;
 				console.log(shortUrl);
-				let miniUrl = `<p id="url4copy">${shortUrl}</p>`;
+				let miniUrl = `<p id="url4copy"><a href=${shortUrl} target = '_blank'>${shortUrl}</a></p>`;
 				answer.innerHTML = '<p>Your shortened URL is:'+ miniUrl;
 				answer.style.visibility = 'visible';
 				CopyToClipboard('url4copy');

@@ -189,6 +189,10 @@ input{
 	padding: 5px 0;
 }
 
+#answer a{
+	color: #1a1aff;
+}
+
 #sub-label a{
 	color: #1a1aff;
 }
