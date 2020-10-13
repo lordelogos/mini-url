@@ -61,7 +61,7 @@ async function getLink(e){
 				answer.innerHTML = '<p>Your shortened URL is:'+ miniUrl;
 				answer.style.visibility = 'visible';
 				CopyToClipboard('url4copy');
-				alert('Url copied to clipboard');
+				alert('Your URL is ready');
 
 		}else{
 			window.alert('Invalid URL (www.example.com, htttp://example.com, smtp://example.com');
