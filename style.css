@@ -187,7 +187,6 @@ input{
 #answer p{
 	border-bottom: solid 1px black;
 	padding: 5px 0;
-	cursor: pointer;
 }
 
 #sub-label a{
