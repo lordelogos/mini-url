@@ -22,6 +22,64 @@ var howto = document.querySelector('#howto');
 home.addEventListener('click', showHome);
 howto.addEventListener('click', showHowto);
 
+// 
+let answer = document.querySelector('#answer');
+	let form = document.querySelector('form');
+	form.addEventListener('submit', getLink);
+	var url;
+
+
+async function getLink(e){
+		e.preventDefault();
+		url = document.querySelector('#url').value;
+		//url validation
+		const regex = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+		if(regex.test(url)){
+			let link = url;
+			link = link.trim();
+			let hyperlink = link.slice(0, 3);
+			if (hyperlink === 'www') {
+				link = 'https://' + link.slice(4);
+			}else if (hyperlink !=='htt') {
+				window.alert('Invalid URL (www.example.com, htttp://example.com, smtp://example.com');
+				document.querySelector('#url').value ='';
+				return;
+			}
+			const response = await fetch(`https://rel.ink/api/links/?url=${link}`, {
+					method: 'POST',
+					headers: {
+						'Content-type': 'application/json'
+					},
+					body: JSON.stringify({ url: `${link}` })
+				});
+				const json = await response.json();
+				console.log(json);
+				const shortUrl = 'https://rel.ink/' + json.hashid;
+				const longUrl = json.url;
+				console.log(shortUrl);
+				let miniUrl = `<p id="url4copy">${shortUrl}</p>`;
+				answer.innerHTML = '<p>Your shortened URL is:'+ miniUrl;
+				answer.style.visibility = 'visible';
+				CopyToClipboard('url4copy');
+				alert('Url copied to clipboard');
+
+		}else{
+			window.alert('Invalid URL (www.example.com, htttp://example.com, smtp://example.com');
+		};
+		document.querySelector('#url').value ='';
+	}
+
+
+	function CopyToClipboard(id){
+	var r = document.createRange();
+	r.selectNode(document.getElementById(id));
+	window.getSelection().removeAllRanges();
+	window.getSelection().addRange(r);
+	document.execCommand('copy');
+	window.getSelection().removeAllRanges();
+	};
+
+
 function showHome(e){
 	e.preventDefault();
 	body.innerHTML = `<label id="main-label">URL shortener</label>
