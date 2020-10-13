@@ -126,11 +126,11 @@ function showHome(e){
 				const shortUrl = 'https://rel.ink/' + json.hashid;
 				const longUrl = json.url;
 				console.log(shortUrl);
-				let miniUrl = `<p id="url4copy">${shortUrl}</p>`;
+				let miniUrl = `<p id="url4copy"><a href=${shortUrl} target = '_blank'>${shortUrl}</a></p>`;
 				answer.innerHTML = '<p>Your shortened URL is:'+ miniUrl;
 				answer.style.visibility = 'visible';
 				CopyToClipboard('url4copy');
-				alert('Url copied to clipboard');
+				alert('Your URL is ready');
 
 		}else{
 			window.alert('Invalid URL (www.example.com, htttp://example.com, smtp://example.com');
@@ -138,6 +138,15 @@ function showHome(e){
 		document.querySelector('#url').value ='';
 	}
 
+
+	function CopyToClipboard(id){
+	var r = document.createRange();
+	r.selectNode(document.getElementById(id));
+	window.getSelection().removeAllRanges();
+	window.getSelection().addRange(r);
+	document.execCommand('copy');
+	window.getSelection().removeAllRanges();
+	};
 
 	function CopyToClipboard(id){
 	var r = document.createRange();
